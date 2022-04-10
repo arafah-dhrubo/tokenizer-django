@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="w-5/6 mx-auto mt-4">
+        <form class="border rounded p-2 w-3/6 mx-auto" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form|crispy }}
+
+            <div class="w-100">
+                <button type="submit" class="bg-primary text-white py-2 w-100 mt-2">Upload code</button>
+            </div>
+        </form>
+
+    <div class="mt-6 w-4/6 mx-auto">
+        <h1 class="text-center text-3xl">Uploaded Program Files</h1>
+        <table class="table">
+            <thead>
+            <th>File</th>
+            <th>Action</th>
+            </thead>
+            <tbody>
+
+            {% for file in data %}
+                <tr>
+                <td>{{ file.file }}</td>
+                <td>
+                    <a href="\generator\{{ file.id }}" class="bg-primary text-white px-2 py-1">Generate table</a>
+                </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    </div>
+{% endblock %}
